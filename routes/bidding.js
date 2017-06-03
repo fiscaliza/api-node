@@ -9,4 +9,6 @@ router.param('id', controller.fetch);
 router.get('/', controller.getAll)
 router.get(`/${fetchParam}`, controller.findOne)
 
+router.post(`/${fetchParam}/vote`, controller.vote)
+
 export default router

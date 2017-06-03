@@ -1,5 +1,8 @@
-import * as db from '../helpers/db';
+import * as db from '../helpers/db'
+import dotenv from 'dotenv'
 
-const dbConnection = db.connect('luppa').connection;
+dotenv.config()
+
+const dbConnection = db.connect('luppa').connection
 
 require('./bidding').model(dbConnection);

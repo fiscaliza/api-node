@@ -39,24 +39,24 @@ export const connect = (connectionName = Date.now().toString(), connectionUrl = 
     }
 
     connection.once('open', () => {
-      debug('Connection open with', connectionUrl);
+      console.log('Connection open with', connectionUrl);
     });
 
     connection.once('connected', () => {
-      debug('Connected to', connectionUrl);
+      console.log('Connected to', connectionUrl);
     });
 
     connection.once('disconnected', () => {
-      debug('Disconnected from', connectionUrl);
+      console.log('Disconnected from', connectionUrl);
     });
 
     connection.once('error', (error) => {
-      debug('Connection error', error);
+      console.log('Connection error', error);
     });
 
     process.on('SIGINT', () => {
       connection.close(() => {
-        debug('Connection closed by ctrl+C command');
+        console.log('Connection closed by ctrl+C command');
         process.exit(0);
       });
     });

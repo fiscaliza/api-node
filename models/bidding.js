@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import schema from './schemas/bidding';
+import schema from './schemas/bidding'
 
-
-export default mongoose.model('Bidding', schema);
+export const model = (connection) => {
+  return connection.model('Bidding', schema)
+};

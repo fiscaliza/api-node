@@ -23,9 +23,13 @@ export const findOne = async(req, res) => {
 export const getAll = async(req, res) => {
   const { Bidding } = db.connect('luppa').connection.models
 
-  const documents = await Bidding.find()
+  const documents = await Bidding.find({}, 'productName score orderType').sort('score')
 
   res.status(200).json(documents)
   res.end()
+}
+
+export const vote = async(req, res) => {
+
 }
 
