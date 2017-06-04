@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 const schema = new Schema({
   productAlias: { type: String, required: true },
   orderType: { type: String },
+  avaazUrl: { type: String, default: '' },
   votes: { type: Array }
 })
 
