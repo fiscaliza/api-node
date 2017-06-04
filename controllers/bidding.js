@@ -35,17 +35,11 @@ export const getAll = async(req, res) => {
 }
 
 export const vote = async(req, res) => {
-  const { user } = req.body
+  const user = req.body
   const bid = req.entities.item
 
   const voted = await bid.addVote({ user })
 
-  if (voted === process.env.MIN_VOTES) {
-    await bid.createPetition({ user })
-  } else {
-    await bid.updatePetition({ user })
-
-  }
   res.status(200).json({ voted: true })
   res.end()
 }
