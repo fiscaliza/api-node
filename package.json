@@ -16,10 +16,13 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
-    "mongoose": "^4.10.4"
+    "lodash": "^4.17.4",
+    "mongoose": "^4.10.4",
+    "omit-deep": "^0.3.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",

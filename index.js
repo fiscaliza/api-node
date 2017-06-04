@@ -1,9 +1,13 @@
 import express from 'express'
 import Routes from './routes'
+import bodyParser from 'body-parser'
 import './models'
 
 const port = process.env.PORT_NODE
 const app = express()
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', Routes)
 
