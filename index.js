@@ -2,7 +2,7 @@ import express from 'express'
 import Routes from './routes'
 import './models'
 
-const port = 3000
+const port = process.env.PORT_NODE
 const app = express()
 
 app.use('/', Routes)
