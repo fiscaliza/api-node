@@ -7,6 +7,7 @@ import './models'
 const port = process.env.PORT_NODE
 const app = express()
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
