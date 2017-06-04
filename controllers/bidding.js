@@ -13,8 +13,8 @@ export const fetch = async(req, res, next, id) => {
 
 export const findOne = async(req, res) => {
   if (req.entities) {
-    console.log(req.entities)
-    res.status(200).json({ item: _.omit(await req.entities.item.toObject(), ['votes']) })
+    const item = _.omit(await req.entities.item.toObject(), ['votes', 'item'])
+    res.status(200).json(item)
   } else {
     res.status(404).json({ error: 'Item not found' })
   }

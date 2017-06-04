@@ -24,6 +24,10 @@ schema.virtual('type').get(function() {
   return aux
 })
 
+schema.virtual('scores').set(function() {
+  return parseInt(this.score)
+})
+
 schema.virtual('numberVotes').get(function() {
   if (this.votes) {
     return this.votes.length
