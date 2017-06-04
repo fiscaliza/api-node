@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 
 const schema = new Schema({
   productAlias: { type: String, required: true },
-  orderType: { type: String }
+  orderType: { type: String },
+  votes: { type: Array }
 })
 
 schema.virtual('id').get(function() {
@@ -21,6 +22,14 @@ schema.virtual('type').get(function() {
   aux = aux.replace(/ /gi, '-')
 
   return aux
+})
+
+schema.virtual('numberVotes').get(function() {
+  if (this.votes) {
+    return this.votes.length
+  } else {
+    return 0
+  }
 })
 
 // Plugins

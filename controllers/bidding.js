@@ -1,4 +1,6 @@
+import mongoose from 'mongoose'
 import Promise from 'bluebird'
+import _ from 'lodash'
 import * as db from '../helpers/db'
 
 export const fetch = async(req, res, next, id) => {
@@ -12,7 +14,7 @@ export const fetch = async(req, res, next, id) => {
 export const findOne = async(req, res) => {
   if (req.entities) {
     console.log(req.entities)
-    res.status(200).json({ item: req.entities.item })
+    res.status(200).json({ item: _.omit(await req.entities.item.toObject(), ['votes']) })
   } else {
     res.status(404).json({ error: 'Item not found' })
   }
@@ -22,11 +24,10 @@ export const findOne = async(req, res) => {
 export const getAll = async(req, res) => {
   const { Bidding } = db.connect('luppa').connection.models
 
-  const documents = await Bidding.find({}).sort('score')
-  const pick = ['id', 'name', 'type']
+  const documents = await Bidding.find({}).sort('-score')
 
   let docs = await Promise.all(
-    documents.map(async(item) => await item.toObject())
+    documents.map(async(item) => _.pick(await item.toObject(), ['id', 'name', 'type', 'score']))
   )
 
   res.status(200).json(docs)
@@ -34,10 +35,11 @@ export const getAll = async(req, res) => {
 }
 
 export const vote = async(req, res) => {
-  const { Bidding } = db.connect('luppa').connection.models
   const { user } = req.body
+  const bid = req.entities.item
 
-  res.status(200).json({ok:1})
+  const voted = await bid.addVote({ user })
+
+  res.status(200).json({ voted })
   res.end()
 }
-
