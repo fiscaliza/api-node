@@ -35,19 +35,19 @@ export const getAll = async(req, res) => {
     query,
     options,
     'biddings',
-    async (bid) => await bid.toObject({ simplify: true })
+    async (bid) => await bid.toObject({ virtuals: true, simplify: true })
   )
 
   res.status(200).json(documents)
   res.end()
 }
 
-export const vote = async(req, res) => {
+export const support = async(req, res) => {
   const user = req.body
   const bid = req.entities.item
 
-  const voted = await bid.addVote({ user })
+  const supports = await bid.addSupport({ user })
 
-  res.status(200).json({ voted: true })
+  res.status(200).json({ supports })
   res.end()
 }

@@ -8,7 +8,7 @@ router.param('id', controller.fetch);
 
 router.get('/', controller.getAll)
 
-router.post(`/${fetchParam}/vote`, controller.vote)
+router.post(`/${fetchParam}/support`, controller.support)
 router.get(`/${fetchParam}`, controller.findOne)
 
 export default router

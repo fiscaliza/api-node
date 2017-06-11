@@ -1,30 +1,29 @@
 import schema from './schemas/bidding'
-import Avaaz from '../helpers/avaaz'
 import _ from 'lodash'
 
 const _transformObject = schema.options.toObject.transform;
 
 export const model = (connection) => {
-  schema.methods.addVote = async function ({ user } = {}) {
-    if (this.votes) {
-      const isVoted = this.votes.filter(item => item.email === user.email).length > 0
-      if (!isVoted) {
-        this.votes.push(user)
+  schema.methods.addSupport = async function ({ user } = {}) {
+    if (this.supports.length > 0) {
+      const hasSupported = this.supports.filter(item => item.googleId === user.googleId).length > 0
+      if (!hasSupported) {
+        this.supports.push(user)
       }
     } else {
-      this.votes = []
-      this.votes.push(user)
+      this.supports = []
+      this.supports.push(user)
     }
 
     await this.save()
-    return this.votes.length
+    return this.supports.length
   }
 
   schema.options.toObject.transform = async(doc, ret, options) => {
     if (options.simplify) {
       options.omit = [
         ...(options.omit || []),
-        'votes',
+        'supports',
         'products',
         'biddingUrl',
         'orderNumber',
