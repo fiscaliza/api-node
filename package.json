@@ -22,6 +22,7 @@
     "express": "^4.15.3",
     "lodash": "^4.17.4",
     "mongoose": "^4.10.4",
+    "mongoose-paginate": "^5.0.3",
     "omit-deep": "^0.3.0"
   },
   "devDependencies": {
