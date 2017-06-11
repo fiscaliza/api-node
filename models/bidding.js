@@ -20,15 +20,22 @@ export const model = (connection) => {
     return this.votes.length
   }
 
-  schema.methods.createPetition = ({ user }) => {
-
-  }
-
-  schema.methods.updatePetition = ({ user }) => {
-
-  }
-
   schema.options.toObject.transform = async(doc, ret, options) => {
+    if (options.simplify) {
+      options.omit = [
+        ...(options.omit || []),
+        'votes',
+        'products',
+        'biddingUrl',
+        'orderNumber',
+        'registerAt',
+        'createdAt',
+        'crawlerPrice',
+        'totalPrice',
+        'avaazUrl'
+      ]
+    }
+
     let transformed = _.clone(await _transformObject(doc, ret, options));
     return transformed
   }
