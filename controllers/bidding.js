@@ -22,12 +22,12 @@ export const findOne = async(req, res) => {
 
 export const getAll = async(req, res) => {
   const { Bidding } = db.connect('luppa').connection.models
-  const { page, limit } = req.query
+  const { page = 1, limit = 19 } = req.query
 
   let query = {}
   let options = {
-    page: parseInt(page),
-    limit: parseInt(limit),
+    page: ~~page,
+    limit: ~~limit,
     sort: '-score'
   }
 
